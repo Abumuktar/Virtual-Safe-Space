@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Textarea } from '@/components/ui/textarea';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { reportUpdateSchema } from '@/lib/validations';
 import {
   ArrowLeft,
   Calendar,
@@ -90,14 +91,27 @@ const ReportDetail = () => {
   }, [id, user]);
 
   const handleSendUpdate = async () => {
-    if (!newMessage.trim() || !report) return;
+    if (!report) return;
+
+    // Validate with zod
+    const result = reportUpdateSchema.safeParse({ message: newMessage });
+    if (!result.success) {
+      toast({
+        title: 'Validation Error',
+        description: result.error.errors[0]?.message || 'Invalid message',
+        variant: 'destructive',
+      });
+      return;
+    }
 
     setSending(true);
     try {
+      const validatedMessage = result.data.message;
+      
       const { error } = await supabase.from('report_updates').insert({
         report_id: report.id,
         user_id: user?.id,
-        message: newMessage,
+        message: validatedMessage,
         is_admin_update: false,
       });
 
@@ -107,7 +121,7 @@ const ReportDetail = () => {
         ...updates,
         {
           id: Date.now().toString(),
-          message: newMessage,
+          message: validatedMessage,
           is_admin_update: false,
           created_at: new Date().toISOString(),
         },
