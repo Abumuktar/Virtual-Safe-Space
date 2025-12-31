@@ -36,7 +36,7 @@ const AdminDashboard = () => {
     fetchData();
   }, []);
 
-  const updateStatus = async (reportId: string, newStatus: string) => {
+  const updateStatus = async (reportId: string, newStatus: 'pending' | 'under_review' | 'resolved' | 'closed') => {
     try {
       await supabase.from('reports').update({ status: newStatus }).eq('id', reportId);
       setRecentReports(prev => prev.map(r => r.id === reportId ? { ...r, status: newStatus } : r));
@@ -96,7 +96,7 @@ const AdminDashboard = () => {
                       <p className="font-medium">{report.incident_type}</p>
                       <p className="text-sm text-muted-foreground">{new Date(report.created_at).toLocaleDateString()}</p>
                     </div>
-                    <Select value={report.status} onValueChange={(v) => updateStatus(report.id, v)}>
+                    <Select value={report.status} onValueChange={(v) => updateStatus(report.id, v as 'pending' | 'under_review' | 'resolved' | 'closed')}>
                       <SelectTrigger className="w-40">
                         <SelectValue />
                       </SelectTrigger>
