@@ -43,24 +43,27 @@
 
     --radius: 0.75rem;
 
-    /* Custom VSS colors */
+    /* Custom VSS colors - Vibrant Pink Theme */
     --teal: 175 58% 45%;
     --teal-light: 175 55% 92%;
-    --pink: 340 55% 65%;
-    --pink-light: 340 45% 94%;
+    --pink: 340 70% 55%;
+    --pink-light: 340 50% 92%;
+    --pink-vibrant: 340 85% 60%;
     --purple: 262 45% 55%;
     --purple-light: 262 40% 94%;
     --navy: 243 40% 20%;
 
-    /* Gradients */
-    --gradient-hero: linear-gradient(135deg, hsl(175 58% 45% / 0.1) 0%, hsl(340 55% 65% / 0.1) 50%, hsl(262 45% 55% / 0.1) 100%);
+    /* Gradients - Enhanced Pink */
+    --gradient-hero: linear-gradient(135deg, hsl(340 70% 55% / 0.9) 0%, hsl(340 85% 60% / 0.8) 30%, hsl(175 58% 45% / 0.7) 100%);
     --gradient-primary: linear-gradient(135deg, hsl(175 58% 45%) 0%, hsl(262 45% 55%) 100%);
+    --gradient-pink: linear-gradient(135deg, hsl(340 70% 55%) 0%, hsl(340 85% 65%) 50%, hsl(340 65% 50%) 100%);
     --gradient-soft: linear-gradient(180deg, hsl(210 40% 98%) 0%, hsl(340 45% 98%) 100%);
 
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(243 40% 20% / 0.08);
     --shadow-card: 0 8px 32px -8px hsl(243 40% 20% / 0.1);
     --shadow-glow: 0 0 40px hsl(175 58% 45% / 0.2);
+    --shadow-pink: 0 0 40px hsl(340 70% 55% / 0.3);
 
     /* Sidebar */
     --sidebar-background: 0 0% 100%;

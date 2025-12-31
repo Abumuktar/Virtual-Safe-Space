@@ -13,7 +13,6 @@ import {
   Shield,
   Users,
   ChevronDown,
-  Bell,
 } from 'lucide-react';
 import vssLogo from '@/assets/vss-logo.png';
 import {
@@ -23,6 +22,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { NotificationBell } from '@/components/admin/NotificationBell';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -64,19 +64,22 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
           <Menu size={24} />
         </button>
         <img src={vssLogo} alt="VSS" className="h-8 w-auto" />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <button className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-medium">
-              {user?.email?.charAt(0).toUpperCase()}
-            </button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-48">
-            <DropdownMenuItem onClick={handleSignOut}>
-              <LogOut size={16} className="mr-2" />
-              Sign Out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        <div className="flex items-center gap-2">
+          {isAdmin && <NotificationBell />}
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-primary-foreground font-medium">
+                {user?.email?.charAt(0).toUpperCase()}
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-48">
+              <DropdownMenuItem onClick={handleSignOut}>
+                <LogOut size={16} className="mr-2" />
+                Sign Out
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </div>
       </header>
 
       {/* Mobile Sidebar Overlay */}
@@ -99,12 +102,15 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
             <Link to="/" className="flex items-center gap-2">
               <img src={vssLogo} alt="VSS" className="h-8 w-auto" />
             </Link>
-            <button
-              onClick={() => setSidebarOpen(false)}
-              className="lg:hidden p-2 hover:bg-muted rounded-lg transition-colors"
-            >
-              <X size={20} />
-            </button>
+            <div className="flex items-center gap-2">
+              {isAdmin && <NotificationBell />}
+              <button
+                onClick={() => setSidebarOpen(false)}
+                className="lg:hidden p-2 hover:bg-muted rounded-lg transition-colors"
+              >
+                <X size={20} />
+              </button>
+            </div>
           </div>
 
           {/* Navigation */}
