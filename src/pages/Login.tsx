@@ -67,11 +67,8 @@ const Login = () => {
               {isLoading ? "Signing in..." : <><span>Sign In</span><ArrowRight size={18} /></>}
             </Button>
           </form>
-          <div className="mt-6 text-center space-y-2">
+          <div className="mt-6 text-center">
             <p className="text-muted-foreground">Don't have an account? <Link to="/signup" className="text-primary font-medium hover:underline">Create one</Link></p>
-            <p className="text-sm text-muted-foreground">
-              Are you an admin? <Link to="/admin/login" className="text-pink font-medium hover:underline">Admin Login</Link>
-            </p>
           </div>
         </div>
         <div className="text-center mt-6"><Link to="/" className="text-sm text-muted-foreground hover:text-foreground">← Back to home</Link></div>
