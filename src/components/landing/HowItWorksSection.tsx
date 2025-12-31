@@ -1,4 +1,5 @@
 import { UserPlus, FileText, CheckCircle } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const steps = [
   {
@@ -25,10 +26,18 @@ const steps = [
 ];
 
 const HowItWorksSection = () => {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+
   return (
-    <section id="how-it-works" className="py-20 md:py-28 bg-muted/30">
+    <section 
+      ref={ref}
+      id="how-it-works" 
+      className={`py-20 md:py-28 bg-muted/30 transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-light text-primary text-sm font-medium mb-6">
             <CheckCircle size={16} />
             <span>Simple Process</span>
@@ -44,11 +53,17 @@ const HowItWorksSection = () => {
         {/* Steps - Desktop horizontal, Mobile vertical */}
         <div className="relative max-w-4xl mx-auto">
           {/* Connection line - Desktop */}
-          <div className="hidden md:block absolute top-16 left-[15%] right-[15%] h-0.5 bg-border" />
+          <div className={`hidden md:block absolute top-16 left-[15%] right-[15%] h-0.5 bg-border transition-all duration-1000 delay-300 ${isVisible ? "scale-x-100" : "scale-x-0"}`} />
 
           <div className="grid md:grid-cols-3 gap-8 md:gap-4">
             {steps.map((item, index) => (
-              <div key={item.step} className="relative flex flex-col items-center text-center">
+              <div 
+                key={item.step} 
+                className={`relative flex flex-col items-center text-center transition-all duration-500 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${(index + 2) * 150}ms` }}
+              >
                 {/* Step number with icon */}
                 <div className={`relative z-10 w-32 h-32 rounded-full bg-card shadow-card flex items-center justify-center mb-6 transition-transform duration-300 hover:scale-105`}>
                   <div className="absolute inset-2 rounded-full bg-gradient-to-br from-${item.color}/10 to-transparent" />

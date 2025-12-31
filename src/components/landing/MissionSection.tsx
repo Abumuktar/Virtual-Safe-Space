@@ -1,10 +1,19 @@
 import { Eye, Target } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const MissionSection = () => {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+
   return (
-    <section id="mission" className="py-20 md:py-28 bg-muted/30">
+    <section 
+      ref={ref}
+      id="mission" 
+      className={`py-20 md:py-28 bg-muted/30 transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
             <Target size={16} />
             <span>Our Purpose</span>
@@ -16,7 +25,7 @@ const MissionSection = () => {
 
         <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
           {/* Vision Card */}
-          <div className="group relative bg-card rounded-3xl shadow-card p-8 md:p-10 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-glow">
+          <div className={`group relative bg-card rounded-3xl shadow-card p-8 md:p-10 overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-glow delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
             <div className="relative z-10">
               <div className="w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-6">
                 <Eye size={28} className="text-primary" />
@@ -33,7 +42,7 @@ const MissionSection = () => {
           </div>
 
           {/* Mission Card */}
-          <div className="group relative bg-card rounded-3xl shadow-card p-8 md:p-10 overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:shadow-glow">
+          <div className={`group relative bg-card rounded-3xl shadow-card p-8 md:p-10 overflow-hidden transition-all duration-500 hover:-translate-y-1 hover:shadow-glow delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"}`}>
             <div className="relative z-10">
               <div className="w-14 h-14 rounded-2xl bg-accent/10 flex items-center justify-center mb-6">
                 <Target size={28} className="text-accent" />

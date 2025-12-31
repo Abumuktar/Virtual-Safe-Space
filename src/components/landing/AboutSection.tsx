@@ -1,12 +1,21 @@
 import { Shield, Users, Heart } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const AboutSection = () => {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+
   return (
-    <section id="about" className="py-20 md:py-28 bg-background">
+    <section 
+      ref={ref}
+      id="about" 
+      className={`py-20 md:py-28 bg-background transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           {/* Content */}
-          <div className="space-y-6">
+          <div className={`space-y-6 transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-teal-light text-primary text-sm font-medium">
               <Users size={16} />
               <span>About VSS</span>
@@ -43,7 +52,7 @@ const AboutSection = () => {
           </div>
 
           {/* Visual */}
-          <div className="relative">
+          <div className={`relative transition-all duration-700 delay-400 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 translate-x-10"}`}>
             <div className="relative z-10 bg-card rounded-3xl shadow-card p-8 md:p-10">
               <div className="space-y-6">
                 <div className="flex items-start gap-4">

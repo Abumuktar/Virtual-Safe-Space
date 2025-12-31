@@ -1,4 +1,5 @@
 import { Target } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const sdgs = [
   {
@@ -39,10 +40,17 @@ const sdgs = [
 ];
 
 const SDGSection = () => {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+
   return (
-    <section className="py-24 bg-gradient-to-b from-background via-pink-light/20 to-background overflow-hidden">
+    <section 
+      ref={ref}
+      className={`py-24 bg-gradient-to-b from-background via-pink-light/20 to-background overflow-hidden transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink/10 text-pink text-sm font-medium mb-6">
             <Target size={16} />
             <span>UN Sustainable Development Goals</span>
@@ -56,23 +64,22 @@ const SDGSection = () => {
           </p>
         </div>
 
-        {/* SDG Cards with prominent numbers */}
+        {/* SDG Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
           {sdgs.map((sdg, index) => (
             <div
               key={sdg.number}
-              className="group relative overflow-hidden rounded-2xl shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-2 animate-fade-up opacity-0"
-              style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}
+              className={`group relative overflow-hidden rounded-2xl shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-2 ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${(index + 2) * 100}ms` }}
             >
-              {/* SDG Number Header */}
               <div className={`${sdg.color} p-4 flex items-center justify-center`}>
                 <div className="text-center">
                   <span className="text-white/80 text-xs font-medium uppercase tracking-wider">SDG</span>
                   <div className="text-white font-bold text-5xl">{sdg.number}</div>
                 </div>
               </div>
-              
-              {/* Content */}
               <div className="bg-card p-4">
                 <h3 className={`font-display font-bold text-sm ${sdg.textColor} mb-2 leading-tight`}>
                   {sdg.title}
@@ -81,15 +88,13 @@ const SDGSection = () => {
                   {sdg.description}
                 </p>
               </div>
-
-              {/* Hover effect */}
               <div className={`absolute inset-0 ${sdg.color} opacity-0 group-hover:opacity-5 transition-opacity`} />
             </div>
           ))}
         </div>
 
-        {/* SDG Wheel and commitment */}
-        <div className="flex flex-col md:flex-row items-center justify-center gap-8 p-8 bg-card rounded-3xl shadow-soft">
+        {/* SDG Wheel */}
+        <div className={`flex flex-col md:flex-row items-center justify-center gap-8 p-8 bg-card rounded-3xl shadow-soft transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="flex-shrink-0">
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png" 
