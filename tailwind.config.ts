@@ -67,10 +67,10 @@ export default {
           light: "hsl(var(--teal-light))",
         },
         pink: {
-70:           DEFAULT: "hsl(var(--pink))",
-71:           light: "hsl(var(--pink-light))",
-72:           vibrant: "hsl(var(--pink-vibrant))",
-73:         },
+          DEFAULT: "hsl(var(--pink))",
+          light: "hsl(var(--pink-light))",
+          vibrant: "hsl(var(--pink-vibrant))",
+        },
         purple: {
           DEFAULT: "hsl(var(--purple))",
           light: "hsl(var(--purple-light))",

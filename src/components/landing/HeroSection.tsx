@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { Shield, Heart, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import heroImage from "@/assets/hero-image.jpg";
+import heroImage from "@/assets/hero-girls.jpg";
 
 const HeroSection = () => {
   return (
@@ -10,7 +10,7 @@ const HeroSection = () => {
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="African children in a safe learning environment"
+          alt="African girls in a safe learning environment"
           className="w-full h-full object-cover object-center"
         />
         {/* Gradient Overlay - Vibrant Pink to Teal */}
