@@ -67,9 +67,10 @@ export default {
           light: "hsl(var(--teal-light))",
         },
         pink: {
-          DEFAULT: "hsl(var(--pink))",
-          light: "hsl(var(--pink-light))",
-        },
+70:           DEFAULT: "hsl(var(--pink))",
+71:           light: "hsl(var(--pink-light))",
+72:           vibrant: "hsl(var(--pink-vibrant))",
+73:         },
         purple: {
           DEFAULT: "hsl(var(--purple))",
           light: "hsl(var(--purple-light))",
@@ -88,6 +89,7 @@ export default {
         soft: "var(--shadow-soft)",
         card: "var(--shadow-card)",
         glow: "var(--shadow-glow)",
+        pink: "var(--shadow-pink)",
       },
       keyframes: {
         "accordion-down": {

@@ -11,6 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
 import { reportSchema, INCIDENT_TYPES, SEVERITY_LEVELS } from '@/lib/validations';
+import { ConfirmationDialog } from '@/components/ui/confirmation-dialog';
 import {
   Shield,
   Calendar,
@@ -36,6 +37,10 @@ const ReportHarassment = () => {
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [showErrorDialog, setShowErrorDialog] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [showConfirmDialog, setShowConfirmDialog] = useState(false);
 
   const [formData, setFormData] = useState({
     incidentType: '' as typeof INCIDENT_TYPES[number] | '',
@@ -68,9 +73,18 @@ const ReportHarassment = () => {
       return;
     }
 
+    // Show confirmation dialog
+    setShowConfirmDialog(true);
+  };
+
+  const submitReport = async () => {
     setIsSubmitting(true);
+    setShowConfirmDialog(false);
 
     try {
+      const result = reportSchema.safeParse(formData);
+      if (!result.success) return;
+      
       const validatedData = result.data;
       
       const { error } = await supabase.from('reports').insert({
@@ -85,22 +99,19 @@ const ReportHarassment = () => {
 
       if (error) throw error;
 
-      toast({
-        title: 'Report submitted successfully',
-        description: 'Our team will review your report and take appropriate action.',
-      });
-
-      navigate('/dashboard/my-reports');
+      setShowSuccessDialog(true);
     } catch (error: any) {
       console.error('Error submitting report:', error);
-      toast({
-        title: 'Failed to submit report',
-        description: error.message || 'Please try again later.',
-        variant: 'destructive',
-      });
+      setErrorMessage(error.message || 'Please try again later.');
+      setShowErrorDialog(true);
     } finally {
       setIsSubmitting(false);
     }
+  };
+
+  const handleSuccessConfirm = () => {
+    setShowSuccessDialog(false);
+    navigate('/dashboard/my-reports');
   };
 
   return (
@@ -310,6 +321,42 @@ const ReportHarassment = () => {
           </CardContent>
         </Card>
       </div>
+
+      {/* Confirmation Dialog */}
+      <ConfirmationDialog
+        open={showConfirmDialog}
+        onOpenChange={setShowConfirmDialog}
+        type="confirm"
+        title="Submit Report?"
+        description="Your report will be sent to our team for review. You can track its status in 'My Reports'."
+        confirmText="Yes, Submit Report"
+        cancelText="Review Again"
+        onConfirm={submitReport}
+        loading={isSubmitting}
+      />
+
+      {/* Success Dialog */}
+      <ConfirmationDialog
+        open={showSuccessDialog}
+        onOpenChange={setShowSuccessDialog}
+        type="success"
+        title="Report Submitted Successfully!"
+        description="Thank you for trusting us. Our team will review your report and take appropriate action. You can track the status in 'My Reports'."
+        confirmText="View My Reports"
+        onConfirm={handleSuccessConfirm}
+        showCancel={false}
+      />
+
+      {/* Error Dialog */}
+      <ConfirmationDialog
+        open={showErrorDialog}
+        onOpenChange={setShowErrorDialog}
+        type="error"
+        title="Failed to Submit Report"
+        description={errorMessage}
+        confirmText="Try Again"
+        showCancel={false}
+      />
     </DashboardLayout>
   );
 };

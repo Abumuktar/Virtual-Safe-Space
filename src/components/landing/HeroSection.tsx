@@ -1,46 +1,71 @@
 import { Link } from "react-router-dom";
-import { Shield, Heart, ArrowRight } from "lucide-react";
+import { Shield, Heart, ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import heroImage from "@/assets/hero-image.jpg";
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-20 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-hero" />
-      
-      {/* Decorative elements */}
-      <div className="absolute top-1/4 left-10 w-64 h-64 bg-teal-light rounded-full blur-3xl opacity-60" />
-      <div className="absolute bottom-1/4 right-10 w-80 h-80 bg-pink-light rounded-full blur-3xl opacity-60" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-light rounded-full blur-3xl opacity-40" />
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0">
+        <img
+          src={heroImage}
+          alt="African children in a safe learning environment"
+          className="w-full h-full object-cover object-center"
+        />
+        {/* Gradient Overlay - Vibrant Pink to Teal */}
+        <div className="absolute inset-0 bg-gradient-to-br from-pink/80 via-pink/60 to-primary/70" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
+      </div>
 
-      <div className="container relative z-10">
+      {/* Floating decorative elements */}
+      <div className="absolute top-1/4 left-10 w-32 h-32 bg-white/10 rounded-full blur-2xl animate-float" />
+      <div className="absolute bottom-1/3 right-10 w-48 h-48 bg-white/10 rounded-full blur-3xl animate-float animation-delay-200" />
+      <div className="absolute top-1/2 left-1/3 w-24 h-24 bg-accent/20 rounded-full blur-2xl animate-float animation-delay-400" />
+
+      {/* Content */}
+      <div className="container relative z-10 pt-24 pb-32">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8 animate-fade-up opacity-0">
-            <Shield size={16} />
+          <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/20 backdrop-blur-sm text-white text-sm font-medium mb-8 animate-fade-up opacity-0 border border-white/30">
+            <Sparkles size={16} className="text-yellow-300" />
             <span>A Safe Space for Young Voices</span>
+            <Shield size={16} />
           </div>
 
           {/* Headline */}
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight mb-6 animate-fade-up opacity-0 animation-delay-100">
+          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6 animate-fade-up opacity-0 animation-delay-100 drop-shadow-lg">
             Protecting Youth,{" "}
-            <span className="text-gradient">Empowering Voices</span>
+            <span className="text-yellow-300 relative">
+              Empowering Voices
+              <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 300 12" fill="none">
+                <path d="M2 10C50 4 100 2 150 6C200 10 250 4 298 8" stroke="currentColor" strokeWidth="3" strokeLinecap="round" className="text-yellow-300/50" />
+              </svg>
+            </span>
           </h1>
 
           {/* Subtext */}
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-fade-up opacity-0 animation-delay-200">
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 animate-fade-up opacity-0 animation-delay-200 drop-shadow">
             Virtual Safe Space provides a confidential platform for children and youth to report harassment, seek protection, and be heard — because every voice matters.
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16 animate-fade-up opacity-0 animation-delay-300">
-            <Button variant="hero" size="xl" asChild>
-              <Link to="/signup" className="group">
+            <Button 
+              size="xl" 
+              asChild 
+              className="bg-white text-pink hover:bg-white/90 shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 font-bold"
+            >
+              <Link to="/signup" className="group flex items-center gap-2">
                 Get Help / Report Safely
                 <ArrowRight size={20} className="transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
-            <Button variant="hero-outline" size="xl" asChild>
+            <Button 
+              size="xl" 
+              asChild 
+              className="bg-transparent border-2 border-white text-white hover:bg-white/10 backdrop-blur-sm"
+            >
               <a href="#about">
                 Learn More
               </a>
@@ -48,18 +73,18 @@ const HeroSection = () => {
           </div>
 
           {/* Trust indicators */}
-          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 text-muted-foreground animate-fade-up opacity-0 animation-delay-400">
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-teal-light flex items-center justify-center">
-                <Shield size={20} className="text-primary" />
+          <div className="flex flex-wrap items-center justify-center gap-6 md:gap-10 animate-fade-up opacity-0 animation-delay-400">
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-5 py-3 border border-white/20">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <Shield size={20} className="text-white" />
               </div>
-              <span className="text-sm font-medium">100% Confidential</span>
+              <span className="text-sm font-semibold text-white">100% Confidential</span>
             </div>
-            <div className="flex items-center gap-2">
-              <div className="w-10 h-10 rounded-full bg-pink-light flex items-center justify-center">
-                <Heart size={20} className="text-pink" />
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-5 py-3 border border-white/20">
+              <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                <Heart size={20} className="text-pink-200" />
               </div>
-              <span className="text-sm font-medium">Youth-Led Initiative</span>
+              <span className="text-sm font-semibold text-white">Youth-Led Initiative</span>
             </div>
           </div>
         </div>
@@ -73,6 +98,13 @@ const HeroSection = () => {
             fill="hsl(var(--background))"
           />
         </svg>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-28 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="w-6 h-10 rounded-full border-2 border-white/50 flex items-start justify-center p-2">
+          <div className="w-1.5 h-3 bg-white/70 rounded-full animate-pulse" />
+        </div>
       </div>
     </section>
   );
