@@ -1,10 +1,11 @@
-import { HelpCircle, ChevronDown } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const faqs = [
   {
@@ -34,10 +35,17 @@ const faqs = [
 ];
 
 const FAQSection = () => {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+
   return (
-    <section className="py-24 bg-background">
+    <section 
+      ref={ref}
+      className={`py-24 bg-background transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
             <HelpCircle size={16} />
             <span>Frequently Asked Questions</span>
@@ -56,7 +64,10 @@ const FAQSection = () => {
               <AccordionItem
                 key={index}
                 value={`item-${index}`}
-                className="border-0 bg-card rounded-xl shadow-soft px-6 data-[state=open]:shadow-card transition-shadow"
+                className={`border-0 bg-card rounded-xl shadow-soft px-6 data-[state=open]:shadow-card transition-all duration-500 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
+                }`}
+                style={{ transitionDelay: `${(index + 2) * 100}ms` }}
               >
                 <AccordionTrigger className="hover:no-underline py-5 text-left">
                   <span className="font-display font-semibold text-foreground pr-4">
@@ -72,7 +83,7 @@ const FAQSection = () => {
         </div>
 
         {/* Still have questions */}
-        <div className="mt-12 text-center">
+        <div className={`mt-12 text-center transition-all duration-700 delay-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"}`}>
           <p className="text-muted-foreground mb-4">
             Still have questions? We're here to help.
           </p>

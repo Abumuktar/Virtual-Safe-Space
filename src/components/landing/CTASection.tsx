@@ -1,17 +1,23 @@
 import { Link } from "react-router-dom";
 import { ArrowRight, Heart } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const CTASection = () => {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+
   return (
-    <section className="py-20 md:py-28 bg-background relative overflow-hidden">
+    <section 
+      ref={ref}
+      className="py-20 md:py-28 bg-background relative overflow-hidden"
+    >
       {/* Background decorations */}
       <div className="absolute top-0 left-1/4 w-64 h-64 bg-teal-light rounded-full blur-3xl opacity-50" />
       <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-pink-light rounded-full blur-3xl opacity-50" />
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-purple-light rounded-full blur-3xl opacity-30" />
 
       <div className="container relative z-10">
-        <div className="max-w-3xl mx-auto text-center">
+        <div className={`max-w-3xl mx-auto text-center transition-all duration-1000 ${isVisible ? "opacity-100 translate-y-0 scale-100" : "opacity-0 translate-y-10 scale-95"}`}>
           <div className="inline-flex items-center gap-2 mb-6">
             <Heart size={24} className="text-pink animate-pulse" />
           </div>
@@ -25,7 +31,7 @@ const CTASection = () => {
             Take the first step towards safety and healing. We're here to listen, support, and protect you.
           </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+          <div className={`flex flex-col sm:flex-row items-center justify-center gap-4 transition-all duration-700 delay-300 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
             <Button variant="hero" size="xl" asChild>
               <Link to="/signup" className="group">
                 Create an Account

@@ -1,4 +1,5 @@
 import { BookOpen, AlertTriangle, MessageCircle, Sparkles } from "lucide-react";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const focusAreas = [
   {
@@ -32,10 +33,18 @@ const focusAreas = [
 ];
 
 const FocusAreasSection = () => {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+
   return (
-    <section id="focus" className="py-20 md:py-28 bg-background">
+    <section 
+      ref={ref}
+      id="focus" 
+      className={`py-20 md:py-28 bg-background transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container">
-        <div className="text-center max-w-3xl mx-auto mb-16">
+        <div className={`text-center max-w-3xl mx-auto mb-16 transition-all duration-700 delay-100 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-pink-light text-pink text-sm font-medium mb-6">
             <Sparkles size={16} />
             <span>What We Do</span>
@@ -52,8 +61,10 @@ const FocusAreasSection = () => {
           {focusAreas.map((area, index) => (
             <div
               key={area.title}
-              className="group relative bg-card rounded-3xl shadow-soft p-6 md:p-8 transition-all duration-300 hover:-translate-y-2 hover:shadow-card"
-              style={{ animationDelay: `${index * 100}ms` }}
+              className={`group relative bg-card rounded-3xl shadow-soft p-6 md:p-8 transition-all duration-500 hover:-translate-y-2 hover:shadow-card ${
+                isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+              }`}
+              style={{ transitionDelay: `${(index + 2) * 100}ms` }}
             >
               <div className={`w-14 h-14 rounded-2xl bg-${area.bgLight} flex items-center justify-center mb-5 transition-transform duration-300 group-hover:scale-110`}>
                 <area.icon size={28} className={`text-${area.color}`} />

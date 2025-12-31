@@ -2,6 +2,7 @@ import { Handshake, Building, School, Globe, Heart } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useScrollAnimation } from "@/hooks/use-scroll-animation";
 
 const partnerTypes = [
   {
@@ -27,12 +28,19 @@ const partnerTypes = [
 ];
 
 const PartnersSection = () => {
+  const { ref, isVisible } = useScrollAnimation<HTMLElement>();
+
   return (
-    <section className="py-24 bg-gradient-to-b from-muted/30 to-background">
+    <section 
+      ref={ref}
+      className={`py-24 bg-gradient-to-b from-muted/30 to-background transition-all duration-1000 ${
+        isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+      }`}
+    >
       <div className="container">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div>
+          <div className={`transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"}`}>
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium mb-6">
               <Handshake size={16} />
               <span>Partner With Us</span>
@@ -60,8 +68,10 @@ const PartnersSection = () => {
             {partnerTypes.map((partner, index) => (
               <Card 
                 key={partner.title}
-                className="border-0 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-1 animate-fade-up opacity-0"
-                style={{ animationDelay: `${index * 100}ms`, animationFillMode: 'forwards' }}
+                className={`border-0 shadow-soft hover:shadow-card transition-all duration-500 hover:-translate-y-1 ${
+                  isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+                }`}
+                style={{ transitionDelay: `${(index + 3) * 100}ms` }}
               >
                 <CardContent className="p-5">
                   <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary/10 to-accent/10 flex items-center justify-center mb-4">
@@ -80,7 +90,7 @@ const PartnersSection = () => {
         </div>
 
         {/* Trust Logos */}
-        <div className="mt-20 text-center">
+        <div className={`mt-20 text-center transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <p className="text-sm text-muted-foreground mb-8">Trusted by organizations across Africa</p>
           <div className="flex flex-wrap justify-center items-center gap-8 opacity-50">
             <div className="h-12 w-32 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">UNICEF</div>
