@@ -10,6 +10,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { supabase } from '@/integrations/supabase/client';
 import { useToast } from '@/hooks/use-toast';
+import { reportSchema, INCIDENT_TYPES, SEVERITY_LEVELS } from '@/lib/validations';
 import {
   Shield,
   Calendar,
@@ -22,23 +23,11 @@ import {
   Info,
 } from 'lucide-react';
 
-const incidentTypes = [
-  'Physical Harassment',
-  'Verbal Harassment',
-  'Cyberbullying',
-  'Sexual Harassment',
-  'Discrimination',
-  'Neglect',
-  'Emotional Abuse',
-  'Domestic Violence',
-  'Other',
-];
-
-const severityLevels = [
-  { value: 'low', label: 'Low - Minor incident', color: 'text-yellow-600' },
-  { value: 'medium', label: 'Medium - Moderate concern', color: 'text-orange-600' },
-  { value: 'high', label: 'High - Serious situation', color: 'text-red-600' },
-  { value: 'critical', label: 'Critical - Immediate danger', color: 'text-red-700' },
+const severityOptions = [
+  { value: 'low' as const, label: 'Low - Minor incident', color: 'text-yellow-600' },
+  { value: 'medium' as const, label: 'Medium - Moderate concern', color: 'text-orange-600' },
+  { value: 'high' as const, label: 'High - Serious situation', color: 'text-red-600' },
+  { value: 'critical' as const, label: 'Critical - Immediate danger', color: 'text-red-700' },
 ];
 
 const ReportHarassment = () => {
@@ -46,22 +35,34 @@ const ReportHarassment = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const [formData, setFormData] = useState({
-    incidentType: '',
+    incidentType: '' as typeof INCIDENT_TYPES[number] | '',
     incidentDate: '',
     location: '',
-    severity: 'medium',
+    severity: 'medium' as typeof SEVERITY_LEVELS[number],
     description: '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setErrors({});
 
-    if (!formData.incidentType || !formData.description) {
+    // Validate with zod
+    const result = reportSchema.safeParse(formData);
+    
+    if (!result.success) {
+      const fieldErrors: Record<string, string> = {};
+      result.error.errors.forEach((err) => {
+        if (err.path[0]) {
+          fieldErrors[err.path[0] as string] = err.message;
+        }
+      });
+      setErrors(fieldErrors);
       toast({
-        title: 'Missing required fields',
-        description: 'Please fill in all required fields.',
+        title: 'Validation Error',
+        description: 'Please fix the errors in the form.',
         variant: 'destructive',
       });
       return;
@@ -70,13 +71,15 @@ const ReportHarassment = () => {
     setIsSubmitting(true);
 
     try {
+      const validatedData = result.data;
+      
       const { error } = await supabase.from('reports').insert({
         user_id: user?.id,
-        incident_type: formData.incidentType,
-        incident_date: formData.incidentDate || null,
-        location: formData.location || null,
-        severity: formData.severity as 'low' | 'medium' | 'high' | 'critical',
-        description: formData.description,
+        incident_type: validatedData.incidentType,
+        incident_date: validatedData.incidentDate || null,
+        location: validatedData.location || null,
+        severity: validatedData.severity,
+        description: validatedData.description,
         status: 'pending',
       });
 
@@ -151,19 +154,22 @@ const ReportHarassment = () => {
                 </Label>
                 <Select
                   value={formData.incidentType}
-                  onValueChange={(value) => setFormData({ ...formData, incidentType: value })}
+                  onValueChange={(value) => setFormData({ ...formData, incidentType: value as typeof INCIDENT_TYPES[number] })}
                 >
-                  <SelectTrigger className="h-12">
+                  <SelectTrigger className={`h-12 ${errors.incidentType ? 'border-destructive' : ''}`}>
                     <SelectValue placeholder="Select the type of incident" />
                   </SelectTrigger>
                   <SelectContent>
-                    {incidentTypes.map((type) => (
+                    {INCIDENT_TYPES.map((type) => (
                       <SelectItem key={type} value={type}>
                         {type}
                       </SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
+                {errors.incidentType && (
+                  <p className="text-sm text-destructive">{errors.incidentType}</p>
+                )}
               </div>
 
               {/* Date and Location Row */}
@@ -178,8 +184,11 @@ const ReportHarassment = () => {
                     type="date"
                     value={formData.incidentDate}
                     onChange={(e) => setFormData({ ...formData, incidentDate: e.target.value })}
-                    className="h-12"
+                    className={`h-12 ${errors.incidentDate ? 'border-destructive' : ''}`}
                   />
+                  {errors.incidentDate && (
+                    <p className="text-sm text-destructive">{errors.incidentDate}</p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="location" className="flex items-center gap-2">
@@ -192,8 +201,12 @@ const ReportHarassment = () => {
                     placeholder="e.g., School, Home, Online"
                     value={formData.location}
                     onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-                    className="h-12"
+                    className={`h-12 ${errors.location ? 'border-destructive' : ''}`}
+                    maxLength={255}
                   />
+                  {errors.location && (
+                    <p className="text-sm text-destructive">{errors.location}</p>
+                  )}
                 </div>
               </div>
 
@@ -205,13 +218,13 @@ const ReportHarassment = () => {
                 </Label>
                 <Select
                   value={formData.severity}
-                  onValueChange={(value) => setFormData({ ...formData, severity: value })}
+                  onValueChange={(value) => setFormData({ ...formData, severity: value as typeof SEVERITY_LEVELS[number] })}
                 >
                   <SelectTrigger className="h-12">
                     <SelectValue />
                   </SelectTrigger>
                   <SelectContent>
-                    {severityLevels.map((level) => (
+                    {severityOptions.map((level) => (
                       <SelectItem key={level.value} value={level.value}>
                         <span className={level.color}>{level.label}</span>
                       </SelectItem>
@@ -231,11 +244,18 @@ const ReportHarassment = () => {
                   placeholder="Please describe what happened. Include as many details as you're comfortable sharing. You can also describe how you're feeling and what kind of help you need."
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                  className="min-h-[180px] resize-none"
+                  className={`min-h-[180px] resize-none ${errors.description ? 'border-destructive' : ''}`}
+                  maxLength={10000}
                 />
-                <p className="text-xs text-muted-foreground">
-                  Minimum 20 characters. Currently: {formData.description.length} characters
+                <p className={`text-xs ${formData.description.length < 20 ? 'text-muted-foreground' : 'text-green-600'}`}>
+                  {formData.description.length < 20 
+                    ? `Minimum 20 characters. Currently: ${formData.description.length}/20`
+                    : `${formData.description.length}/10,000 characters`
+                  }
                 </p>
+                {errors.description && (
+                  <p className="text-sm text-destructive">{errors.description}</p>
+                )}
               </div>
 
               {/* Privacy Notice */}
