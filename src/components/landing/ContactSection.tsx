@@ -78,7 +78,7 @@ const ContactSection = () => {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-5 gap-12 max-w-6xl mx-auto">
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-8">
             <div className="bg-gradient-to-br from-pink to-primary rounded-3xl p-8 text-white">

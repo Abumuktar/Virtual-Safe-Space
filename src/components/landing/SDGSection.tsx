@@ -65,7 +65,7 @@ const SDGSection = () => {
         </div>
 
         {/* SDG Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-12">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3 sm:gap-4 mb-12">
           {sdgs.map((sdg, index) => (
             <div
               key={sdg.number}
@@ -94,12 +94,12 @@ const SDGSection = () => {
         </div>
 
         {/* SDG Wheel */}
-        <div className={`flex flex-col md:flex-row items-center justify-center gap-8 p-8 bg-card rounded-3xl shadow-soft transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
+        <div className={`flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 p-6 md:p-8 bg-card rounded-3xl shadow-soft transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="flex-shrink-0">
             <img 
               src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png" 
               alt="UN SDG Wheel" 
-              className="w-32 h-32 md:w-40 md:h-40"
+              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
             />
           </div>
           <div className="text-center md:text-left max-w-xl">

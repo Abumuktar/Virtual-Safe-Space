@@ -14,6 +14,10 @@ import ReportHarassment from "./pages/ReportHarassment";
 import MyReports from "./pages/MyReports";
 import ReportDetail from "./pages/ReportDetail";
 import AdminDashboard from "./pages/AdminDashboard";
+import AllReports from "./pages/admin/AllReports";
+import AdminSettings from "./pages/admin/AdminSettings";
+import AdminReportDetail from "./pages/admin/AdminReportDetail";
+import Analytics from "./pages/admin/Analytics";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -35,7 +39,10 @@ const App = () => (
             <Route path="/dashboard/my-reports" element={<ProtectedRoute><MyReports /></ProtectedRoute>} />
             <Route path="/dashboard/my-reports/:id" element={<ProtectedRoute><ReportDetail /></ProtectedRoute>} />
             <Route path="/admin" element={<ProtectedRoute requireAdmin><AdminDashboard /></ProtectedRoute>} />
-            <Route path="/admin/reports/:id" element={<ProtectedRoute requireAdmin><ReportDetail /></ProtectedRoute>} />
+            <Route path="/admin/all-reports" element={<ProtectedRoute requireAdmin><AllReports /></ProtectedRoute>} />
+            <Route path="/admin/reports/:id" element={<ProtectedRoute requireAdmin><AdminReportDetail /></ProtectedRoute>} />
+            <Route path="/admin/analytics" element={<ProtectedRoute requireAdmin><Analytics /></ProtectedRoute>} />
+            <Route path="/admin/settings" element={<ProtectedRoute requireAdmin><AdminSettings /></ProtectedRoute>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
