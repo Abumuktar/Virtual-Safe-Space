@@ -8,11 +8,11 @@ const Footer = () => {
   return (
     <footer className="bg-foreground text-background/90 py-12 md:py-16">
       <div className="container">
-        <div className="grid md:grid-cols-4 gap-10 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           {/* Brand */}
-          <div className="md:col-span-2">
-            <img src={vssLogo} alt="Virtual Safe Space" className="h-12 w-auto mb-4 brightness-0 invert" />
-            <p className="text-background/70 max-w-sm leading-relaxed">
+          <div className="col-span-2">
+            <img src={vssLogo} alt="Virtual Safe Space" className="h-10 md:h-12 w-auto mb-4 brightness-0 invert" />
+            <p className="text-background/70 max-w-sm leading-relaxed text-sm md:text-base">
               Virtual Safe Space is a youth-led initiative focused on protecting children and young people through advocacy, awareness, and action.
             </p>
           </div>

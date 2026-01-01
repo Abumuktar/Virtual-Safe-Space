@@ -92,11 +92,11 @@ const PartnersSection = () => {
         {/* Trust Logos */}
         <div className={`mt-20 text-center transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <p className="text-sm text-muted-foreground mb-8">Trusted by organizations across Africa</p>
-          <div className="flex flex-wrap justify-center items-center gap-8 opacity-50">
-            <div className="h-12 w-32 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">UNICEF</div>
-            <div className="h-12 w-32 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">Save the Children</div>
-            <div className="h-12 w-32 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">Plan International</div>
-            <div className="h-12 w-32 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">World Vision</div>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 opacity-50">
+            <div className="h-12 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">UNICEF</div>
+            <div className="h-12 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">Save the Children</div>
+            <div className="h-12 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">Plan International</div>
+            <div className="h-12 bg-muted rounded flex items-center justify-center text-muted-foreground text-xs">World Vision</div>
           </div>
         </div>
       </div>
