@@ -18,6 +18,10 @@ import AllReports from "./pages/admin/AllReports";
 import AdminSettings from "./pages/admin/AdminSettings";
 import AdminReportDetail from "./pages/admin/AdminReportDetail";
 import Analytics from "./pages/admin/Analytics";
+import Resources from "./pages/Resources";
+import Team from "./pages/Team";
+import Privacy from "./pages/Privacy";
+import Terms from "./pages/Terms";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -34,6 +38,10 @@ const App = () => (
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/resources" element={<Resources />} />
+            <Route path="/team" element={<Team />} />
+            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/terms" element={<Terms />} />
             <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
             <Route path="/dashboard/report" element={<ProtectedRoute><ReportHarassment /></ProtectedRoute>} />
             <Route path="/dashboard/my-reports" element={<ProtectedRoute><MyReports /></ProtectedRoute>} />
