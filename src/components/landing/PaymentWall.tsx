@@ -1,12 +1,10 @@
-import { AlertTriangle, Mail, Phone } from "lucide-react";
+import { Mail } from "lucide-react";
 
 const PaymentWall = () => {
   return (
     <div className="fixed inset-0 z-[100] bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
       <div className="bg-background border border-border rounded-2xl max-w-md w-full p-8 text-center shadow-2xl">
-        <div className="w-16 h-16 rounded-full bg-destructive/10 flex items-center justify-center mx-auto mb-6">
-          <AlertTriangle className="w-8 h-8 text-destructive" />
-        </div>
+        <div className="text-6xl mb-6">🎭</div>
 
         <h2 className="text-2xl font-bold text-foreground mb-2">
           Site Access Restricted
@@ -18,18 +16,17 @@ const PaymentWall = () => {
           to restore full access.
         </p>
 
-        <div className="bg-muted/50 rounded-xl p-4 mb-6 text-left space-y-3">
-          <p className="text-sm font-semibold text-foreground">
+        <div className="bg-muted/50 rounded-xl p-4 mb-6">
+          <p className="text-sm font-semibold text-foreground mb-3">
             Contact the developer:
           </p>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Mail size={16} className="text-primary" />
-            <span>developer@example.com</span>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Phone size={16} className="text-primary" />
-            <span>+1 (000) 000-0000</span>
-          </div>
+          <a
+            href="mailto:saytuneorg@gmail.com"
+            className="inline-flex items-center gap-2 text-sm text-primary hover:underline"
+          >
+            <Mail size={16} />
+            saytuneorg@gmail.com
+          </a>
         </div>
 
         <p className="text-xs text-muted-foreground">
