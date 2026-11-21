@@ -88,7 +88,7 @@ const FAQSection = () => {
             Still have questions? We're here to help.
           </p>
           <a 
-            href="mailto:support@virtualsafespace.org" 
+            href="mailto:virtualsafespace2025@gmail.com" 
             className="text-primary hover:text-primary/80 font-medium"
           >
             Contact our support team →

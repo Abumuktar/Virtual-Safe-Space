@@ -1,73 +1,11 @@
 import { Link } from "react-router-dom";
-import { ArrowLeft, Heart, Linkedin, Mail, Twitter, Users } from "lucide-react";
+import { ArrowLeft, Heart, Mail, MapPin, Phone, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-
-const teamMembers = [
-  {
-    name: "Amina Okonkwo",
-    role: "Founder & Executive Director",
-    bio: "A passionate advocate for child protection with over 10 years of experience in youth empowerment across Africa.",
-    image: "AO",
-    color: "from-primary to-accent",
-  },
-  {
-    name: "David Mensah",
-    role: "Head of Programs",
-    bio: "Former educator dedicated to creating safe learning environments and implementing child protection policies.",
-    image: "DM",
-    color: "from-pink to-primary",
-  },
-  {
-    name: "Grace Wanjiku",
-    role: "Community Outreach Lead",
-    bio: "Community organizer with expertise in grassroots mobilization and youth engagement programs.",
-    image: "GW",
-    color: "from-accent to-pink",
-  },
-  {
-    name: "Samuel Osei",
-    role: "Technology Director",
-    bio: "Tech innovator focused on building secure platforms that prioritize user privacy and safety.",
-    image: "SO",
-    color: "from-primary to-pink",
-  },
-  {
-    name: "Fatima Hassan",
-    role: "Counseling Coordinator",
-    bio: "Licensed psychologist specializing in trauma-informed care and youth mental health support.",
-    image: "FH",
-    color: "from-pink to-accent",
-  },
-  {
-    name: "John Kamau",
-    role: "Partnerships Manager",
-    bio: "Strategic relationship builder with experience in NGO collaborations and government partnerships.",
-    image: "JK",
-    color: "from-accent to-primary",
-  },
-];
-
-const advisors = [
-  {
-    name: "Dr. Ngozi Okafor",
-    role: "Child Psychology Expert",
-    organization: "University of Lagos",
-  },
-  {
-    name: "Prof. Kwame Asante",
-    role: "Education Policy Advisor",
-    organization: "Ghana Education Service",
-  },
-  {
-    name: "Hon. Sarah Muthoni",
-    role: "Legal & Policy Advisor",
-    organization: "Kenya Children's Court",
-  },
-];
+import { getInitials, teamMembers, contactInfo } from "@/data/team";
 
 const Team = () => {
   return (
@@ -95,7 +33,7 @@ const Team = () => {
                 Meet the <span className="text-gradient">People</span> Behind VSS
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground">
-                A dedicated team of young professionals committed to protecting and empowering youth across Africa.
+                A dedicated, youth-led team based in Katsina, Nigeria, committed to protecting and empowering children and young people.
               </p>
             </div>
           </div>
@@ -104,38 +42,34 @@ const Team = () => {
         {/* Team Grid */}
         <section className="py-16 md:py-20">
           <div className="container">
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {teamMembers.map((member, index) => (
-                <Card 
-                  key={index} 
-                  className="group border-0 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-2 overflow-hidden"
+            <div className="flex flex-wrap justify-center gap-8">
+              {teamMembers.map((member) => (
+                <Card
+                  key={member.name}
+                  className="group w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] border-0 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-2 overflow-hidden"
                 >
-                  <CardContent className="p-6">
-                    <div className="flex flex-col items-center text-center">
-                      {/* Avatar */}
-                      <div className={`w-24 h-24 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center text-white text-2xl font-bold mb-4 group-hover:scale-110 transition-transform shadow-lg`}>
-                        {member.image}
+                  <div className="aspect-[4/5] overflow-hidden bg-muted">
+                    {member.image ? (
+                      <img
+                        src={member.image}
+                        alt={member.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gradient-to-br from-primary via-accent to-pink flex items-center justify-center text-white font-display font-bold text-5xl">
+                        {getInitials(member.name)}
                       </div>
-                      
-                      <h3 className="font-display text-xl font-bold text-foreground mb-1">
-                        {member.name}
-                      </h3>
-                      <p className="text-primary font-medium text-sm mb-3">{member.role}</p>
-                      <p className="text-muted-foreground text-sm mb-4">{member.bio}</p>
-                      
-                      {/* Social Links */}
-                      <div className="flex items-center gap-2">
-                        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-primary/10 hover:text-primary">
-                          <Linkedin size={16} />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-primary/10 hover:text-primary">
-                          <Twitter size={16} />
-                        </Button>
-                        <Button variant="ghost" size="icon" className="h-8 w-8 rounded-full hover:bg-primary/10 hover:text-primary">
-                          <Mail size={16} />
-                        </Button>
-                      </div>
-                    </div>
+                    )}
+                  </div>
+                  <CardContent className="p-6 text-center">
+                    <h3 className="font-display text-xl font-bold text-foreground mb-1">
+                      {member.name}
+                    </h3>
+                    <p className="text-primary font-medium text-sm">{member.role}</p>
+                    {member.bio && (
+                      <p className="text-muted-foreground text-sm mt-3">{member.bio}</p>
+                    )}
                   </CardContent>
                 </Card>
               ))}
@@ -143,29 +77,43 @@ const Team = () => {
           </div>
         </section>
 
-        {/* Advisors Section */}
+        {/* Contact */}
         <section className="py-16 bg-muted/30">
           <div className="container">
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
               <h2 className="font-display text-3xl md:text-4xl font-bold text-foreground mb-4">
-                Advisory Board
+                Contact the Team
               </h2>
               <p className="text-muted-foreground max-w-xl mx-auto">
-                Guiding our mission with expertise and experience in child protection, education, and policy.
+                Reach out to us for support, partnerships, or to get involved.
               </p>
             </div>
-
-            <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-              {advisors.map((advisor, index) => (
-                <Card key={index} className="border-0 shadow-soft text-center p-6">
-                  <div className="w-16 h-16 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
-                    <Users size={24} className="text-accent" />
+            <div className="grid sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
+              <a href={`mailto:${contactInfo.email}`}>
+                <Card className="border-0 shadow-soft text-center p-6 h-full hover:shadow-card transition-shadow">
+                  <div className="w-14 h-14 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                    <Mail size={22} className="text-primary" />
                   </div>
-                  <h3 className="font-display font-bold text-lg mb-1">{advisor.name}</h3>
-                  <p className="text-primary text-sm font-medium mb-1">{advisor.role}</p>
-                  <p className="text-muted-foreground text-xs">{advisor.organization}</p>
+                  <p className="text-sm text-muted-foreground mb-1">Email</p>
+                  <p className="font-medium text-foreground break-all">{contactInfo.email}</p>
                 </Card>
-              ))}
+              </a>
+              <a href={contactInfo.helplineHref}>
+                <Card className="border-0 shadow-soft text-center p-6 h-full hover:shadow-card transition-shadow">
+                  <div className="w-14 h-14 rounded-full bg-pink/10 flex items-center justify-center mx-auto mb-4">
+                    <Phone size={22} className="text-pink" />
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-1">Helpline</p>
+                  <p className="font-medium text-foreground">{contactInfo.helpline}</p>
+                </Card>
+              </a>
+              <Card className="border-0 shadow-soft text-center p-6 h-full">
+                <div className="w-14 h-14 rounded-full bg-accent/10 flex items-center justify-center mx-auto mb-4">
+                  <MapPin size={22} className="text-accent" />
+                </div>
+                <p className="text-sm text-muted-foreground mb-1">Location</p>
+                <p className="font-medium text-foreground">{contactInfo.location}</p>
+              </Card>
             </div>
           </div>
         </section>
@@ -186,7 +134,7 @@ const Team = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button size="lg" variant="secondary" asChild>
-                    <a href="mailto:careers@virtualsafespace.org">View Opportunities</a>
+                    <a href="mailto:virtualsafespace2025@gmail.com">View Opportunities</a>
                   </Button>
                   <Button size="lg" variant="outline" className="bg-transparent border-white text-white hover:bg-white/10">
                     Volunteer With Us

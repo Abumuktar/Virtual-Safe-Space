@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { useScrollAnimation } from "@/hooks/use-scroll-animation";
+import { contactInfo as contact } from "@/data/team";
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -38,20 +39,20 @@ const ContactSection = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "support@virtualsafespace.org",
-      href: "mailto:support@virtualsafespace.org",
+      value: contact.email,
+      href: `mailto:${contact.email}`,
     },
     {
       icon: Phone,
       label: "Helpline",
-      value: "+234 800 SAFE SPACE",
-      href: "tel:+234800723372",
+      value: contact.helpline,
+      href: contact.helplineHref,
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Lagos, Nigeria",
-      href: "#",
+      value: contact.location,
+      href: "https://maps.google.com/?q=Katsina,+Nigeria",
     },
   ];
 
@@ -92,6 +93,8 @@ const ContactSection = () => {
                   <a
                     key={item.label}
                     href={item.href}
+                    target={item.label === "Location" ? "_blank" : undefined}
+                    rel={item.label === "Location" ? "noopener noreferrer" : undefined}
                     className="flex items-center gap-4 group hover:translate-x-2 transition-transform"
                   >
                     <div className="w-12 h-12 rounded-full bg-white/20 flex items-center justify-center group-hover:bg-white/30 transition-colors">
@@ -99,7 +102,7 @@ const ContactSection = () => {
                     </div>
                     <div>
                       <p className="text-sm text-white/70">{item.label}</p>
-                      <p className="font-medium">{item.value}</p>
+                      <p className="font-medium break-all">{item.value}</p>
                     </div>
                   </a>
                 ))}

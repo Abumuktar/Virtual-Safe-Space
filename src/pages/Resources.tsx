@@ -222,7 +222,7 @@ const Resources = () => {
                 <Link to="/signup">Get Started</Link>
               </Button>
               <Button variant="outline" size="lg" asChild>
-                <a href="mailto:support@virtualsafespace.org">Contact Support</a>
+                <a href="mailto:virtualsafespace2025@gmail.com">Contact Support</a>
               </Button>
             </div>
           </div>

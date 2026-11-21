@@ -21,8 +21,8 @@ const AdminSettings = () => {
   const [generalSettings, setGeneralSettings] = useState({
     siteName: 'Virtual Safe Space',
     siteDescription: 'Protecting youth across Africa',
-    supportEmail: 'support@virtualsafespace.org',
-    helplineNumber: '+234 800 SAFE SPACE',
+    supportEmail: 'virtualsafespace2025@gmail.com',
+    helplineNumber: '0810 303 8196',
   });
 
   // Notification Settings

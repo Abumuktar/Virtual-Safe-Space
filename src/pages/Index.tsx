@@ -8,6 +8,7 @@ import HowItWorksSection from "@/components/landing/HowItWorksSection";
 import SDGSection from "@/components/landing/SDGSection";
 import StatsSection from "@/components/landing/StatsSection";
 import PartnersSection from "@/components/landing/PartnersSection";
+import TeamSection from "@/components/landing/TeamSection";
 import FAQSection from "@/components/landing/FAQSection";
 import ContactSection from "@/components/landing/ContactSection";
 import CTASection from "@/components/landing/CTASection";
@@ -26,6 +27,7 @@ const Index = () => {
         <FocusAreasSection />
         <HowItWorksSection />
         <SDGSection />
+        <TeamSection />
         <PartnersSection />
         <FAQSection />
         <ContactSection />

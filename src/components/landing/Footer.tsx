@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
-import { Shield, Mail, Heart, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Shield, Mail, Heart, Phone, MapPin, Twitter, Facebook, Instagram, Linkedin } from "lucide-react";
+import { contactInfo } from "@/data/team";
 import vssLogo from "@/assets/vss-logo.png";
 
 const Footer = () => {
@@ -15,6 +16,24 @@ const Footer = () => {
             <p className="text-background/70 max-w-sm leading-relaxed text-sm md:text-base mb-6">
               Virtual Safe Space is a youth-led initiative focused on protecting children and young people through advocacy, awareness, and action.
             </p>
+            <ul className="space-y-2 text-sm text-background/70 mb-6">
+              <li>
+                <a href={`mailto:${contactInfo.email}`} className="flex items-center gap-2 hover:text-background transition-colors break-all">
+                  <Mail size={14} className="shrink-0" />
+                  {contactInfo.email}
+                </a>
+              </li>
+              <li>
+                <a href={contactInfo.helplineHref} className="flex items-center gap-2 hover:text-background transition-colors">
+                  <Phone size={14} className="shrink-0" />
+                  {contactInfo.helpline}
+                </a>
+              </li>
+              <li className="flex items-center gap-2">
+                <MapPin size={14} className="shrink-0" />
+                {contactInfo.location}
+              </li>
+            </ul>
             {/* Social Links */}
             <div className="flex items-center gap-3">
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" className="w-9 h-9 rounded-full bg-background/10 flex items-center justify-center hover:bg-background/20 transition-colors">
@@ -79,7 +98,7 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="mailto:support@virtualsafespace.org" className="text-background/70 hover:text-background transition-colors">
+                <a href="mailto:virtualsafespace2025@gmail.com" className="text-background/70 hover:text-background transition-colors">
                   Contact Us
                 </a>
               </li>
@@ -97,7 +116,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="mailto:support@virtualsafespace.org" className="text-background/70 hover:text-background transition-colors flex items-center gap-2">
+                <a href="mailto:virtualsafespace2025@gmail.com" className="text-background/70 hover:text-background transition-colors flex items-center gap-2">
                   <Mail size={14} />
                   Get Help
                 </a>
