@@ -9,7 +9,7 @@ const CTASection = () => {
   return (
     <section 
       ref={ref}
-      className="py-20 md:py-28 bg-background relative overflow-hidden"
+      className="py-16 md:py-24 bg-background relative overflow-hidden"
     >
       {/* Background decorations */}
       <div className="absolute top-0 left-1/4 w-64 h-64 bg-teal-light rounded-full blur-3xl opacity-50" />

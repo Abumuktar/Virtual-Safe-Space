@@ -25,7 +25,7 @@ const Header = () => {
           <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2">
-              <img src={vssLogo} alt="Virtual Safe Space" className="h-10 md:h-12 w-auto" />
+              <img src={vssLogo} alt="Virtual Safe Space" className="h-9 md:h-11 w-auto" />
             </Link>
 
             {/* Desktop Navigation */}

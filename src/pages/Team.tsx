@@ -1,11 +1,12 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, Heart, Mail, MapPin, Phone, Users } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import Header from "@/components/landing/Header";
 import Footer from "@/components/landing/Footer";
-import { getInitials, teamMembers, contactInfo } from "@/data/team";
+import { contactInfo } from "@/data/team";
+import TeamShowcase from "@/components/team/TeamShowcase";
 
 const Team = () => {
   return (
@@ -39,41 +40,10 @@ const Team = () => {
           </div>
         </section>
 
-        {/* Team Grid */}
-        <section className="py-16 md:py-20">
+        {/* Team */}
+        <section className="py-12 md:py-16">
           <div className="container">
-            <div className="flex flex-wrap justify-center gap-8">
-              {teamMembers.map((member) => (
-                <Card
-                  key={member.name}
-                  className="group w-full sm:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.334rem)] border-0 shadow-soft hover:shadow-card transition-all duration-300 hover:-translate-y-2 overflow-hidden"
-                >
-                  <div className="aspect-[4/5] overflow-hidden bg-muted">
-                    {member.image ? (
-                      <img
-                        src={member.image}
-                        alt={member.name}
-                        loading="lazy"
-                        className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-500"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-gradient-to-br from-primary via-accent to-pink flex items-center justify-center text-white font-display font-bold text-5xl">
-                        {getInitials(member.name)}
-                      </div>
-                    )}
-                  </div>
-                  <CardContent className="p-6 text-center">
-                    <h3 className="font-display text-xl font-bold text-foreground mb-1">
-                      {member.name}
-                    </h3>
-                    <p className="text-primary font-medium text-sm">{member.role}</p>
-                    {member.bio && (
-                      <p className="text-muted-foreground text-sm mt-3">{member.bio}</p>
-                    )}
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            <TeamShowcase />
           </div>
         </section>
 

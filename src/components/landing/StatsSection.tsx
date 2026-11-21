@@ -32,12 +32,12 @@ const StatsSection = () => {
   const { ref: testimonialsRef, isVisible: testimonialsVisible } = useScrollAnimation<HTMLDivElement>();
 
   return (
-    <section className="py-24 bg-gradient-to-b from-background to-pink-light/30">
+    <section className="pt-4 pb-16 md:pb-24 bg-background">
       <div className="container">
         {/* Stats Grid */}
         <div 
           ref={statsRef}
-          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-20"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-16 md:mb-20"
         >
           {stats.map((stat, index) => (
             <Card 

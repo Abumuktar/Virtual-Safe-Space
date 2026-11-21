@@ -32,7 +32,7 @@ const HowItWorksSection = () => {
     <section 
       ref={ref}
       id="how-it-works" 
-      className={`py-20 md:py-28 bg-muted/30 transition-all duration-1000 ${
+      className={`py-16 md:py-24 bg-muted/30 transition-all duration-1000 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >

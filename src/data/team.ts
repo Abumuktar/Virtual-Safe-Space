@@ -12,6 +12,8 @@ export interface TeamMember {
   name: string;
   role: string;
   bio?: string;
+  /** Highlighted as the organisation's lead. */
+  featured?: boolean;
   /** Optional portrait. Without one, initials are shown. */
   image?: string;
 }
@@ -22,7 +24,13 @@ export interface TeamMember {
  * import it above, and add an entry below.
  */
 export const teamMembers: TeamMember[] = [
-  { name: "Alamin Mustapha Alkasim", role: "Team Member", image: alamin },
+  {
+    name: "Alamin Mustapha Alkasim",
+    role: "Chairman",
+    bio: "Leads Virtual Safe Space and guides its mission to keep children and young people safe, heard and empowered.",
+    image: alamin,
+    featured: true,
+  },
   { name: "Nabila", role: "Team Member", image: nabila },
   { name: "Usman Abubakar Yar'adua", role: "Team Member", image: usman },
   { name: "Aminatu Ahmad K/Bai", role: "Team Member", image: aminatu },
@@ -31,6 +39,9 @@ export const teamMembers: TeamMember[] = [
   { name: "Fadimatu Hafiz Haske", role: "Team Member", image: fadimatu },
   // { name: "<NAME>", role: "Team Member", image: memberBrownKaftan },
 ];
+
+export const chairman = teamMembers.find((m) => m.featured);
+export const otherMembers = teamMembers.filter((m) => !m.featured);
 
 export const contactInfo = {
   email: "virtualsafespace2025@gmail.com",

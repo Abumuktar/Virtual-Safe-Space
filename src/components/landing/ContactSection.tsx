@@ -60,7 +60,7 @@ const ContactSection = () => {
     <section
       ref={sectionRef}
       id="contact"
-      className={`py-24 bg-gradient-to-b from-muted/30 to-background transition-all duration-1000 ${
+      className={`py-16 md:py-24 bg-gradient-to-b from-muted/30 to-background transition-all duration-1000 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
@@ -81,8 +81,8 @@ const ContactSection = () => {
 
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-12 max-w-6xl mx-auto">
           {/* Contact Info */}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="bg-gradient-to-br from-pink to-primary rounded-3xl p-8 text-white">
+          <div className="lg:col-span-2">
+            <div className="bg-gradient-to-br from-pink to-primary rounded-3xl p-8 text-white h-full">
               <h3 className="font-display text-2xl font-bold mb-6">Contact Information</h3>
               <p className="text-white/80 mb-8">
                 Fill up the form and our team will get back to you within 24 hours.
@@ -115,25 +115,6 @@ const ContactSection = () => {
               </div>
             </div>
 
-            {/* Social proof */}
-            <div className="bg-muted/50 rounded-2xl p-6 border border-border">
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex -space-x-3">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="w-10 h-10 rounded-full bg-gradient-to-br from-pink to-primary flex items-center justify-center text-white text-sm font-bold border-2 border-background"
-                    >
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
-                </div>
-                <div>
-                  <p className="font-semibold text-foreground">500+ Partners</p>
-                  <p className="text-sm text-muted-foreground">Trust Virtual Safe Space</p>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Contact Form */}

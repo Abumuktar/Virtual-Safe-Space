@@ -45,7 +45,7 @@ const SDGSection = () => {
   return (
     <section 
       ref={ref}
-      className={`py-24 bg-gradient-to-b from-background via-pink-light/20 to-background overflow-hidden transition-all duration-1000 ${
+      className={`py-16 md:py-24 bg-gradient-to-b from-background via-pink-light/20 to-background overflow-hidden transition-all duration-1000 ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
       }`}
     >
@@ -96,11 +96,20 @@ const SDGSection = () => {
         {/* SDG Wheel */}
         <div className={`flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 p-6 md:p-8 bg-card rounded-3xl shadow-soft transition-all duration-700 delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}>
           <div className="flex-shrink-0">
-            <img 
-              src="https://upload.wikimedia.org/wikipedia/commons/d/df/Sustainable_Development_Goals.png" 
-              alt="UN SDG Wheel" 
-              className="w-24 h-24 sm:w-32 sm:h-32 md:w-40 md:h-40"
-            />
+<div
+              role="img"
+              aria-label="The 17 UN Sustainable Development Goals"
+              className="relative w-24 h-24 sm:w-32 sm:h-32 md:w-36 md:h-36 rounded-full"
+              style={{
+                background:
+                  "conic-gradient(#E5243B 0 5.88%, #DDA63A 0 11.76%, #4C9F38 0 17.65%, #C5192D 0 23.53%, #FF3A21 0 29.41%, #26BDE2 0 35.29%, #FCC30B 0 41.18%, #A21942 0 47.06%, #FD6925 0 52.94%, #DD1367 0 58.82%, #FD9D24 0 64.71%, #BF8B2E 0 70.59%, #3F7E44 0 76.47%, #0A97D9 0 82.35%, #56C02B 0 88.24%, #00689D 0 94.12%, #19486A 0 100%)",
+              }}
+            >
+              <div className="absolute inset-[22%] rounded-full bg-card flex flex-col items-center justify-center">
+                <span className="font-display font-bold text-foreground text-base sm:text-xl md:text-2xl leading-none">2030</span>
+                <span className="text-[9px] sm:text-[10px] text-muted-foreground uppercase tracking-wider mt-1">Agenda</span>
+              </div>
+            </div>
           </div>
           <div className="text-center md:text-left max-w-xl">
             <h3 className="font-display font-bold text-xl text-foreground mb-2">

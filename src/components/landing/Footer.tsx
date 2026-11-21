@@ -12,7 +12,7 @@ const Footer = () => {
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8 mb-12">
           {/* Brand */}
           <div className="col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2">
-            <img src={vssLogo} alt="Virtual Safe Space" className="h-10 md:h-12 w-auto mb-4 brightness-0 invert" />
+            <img src={vssLogo} alt="Virtual Safe Space" className="h-10 md:h-12 w-auto mb-5 brightness-0 invert" />
             <p className="text-background/70 max-w-sm leading-relaxed text-sm md:text-base mb-6">
               Virtual Safe Space is a youth-led initiative focused on protecting children and young people through advocacy, awareness, and action.
             </p>
