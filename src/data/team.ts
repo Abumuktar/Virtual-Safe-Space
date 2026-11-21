@@ -3,6 +3,10 @@ import nabila from "@/assets/team/nabila.jpg";
 import usman from "@/assets/team/usman-abubakar-yaradua.jpg";
 import aminatu from "@/assets/team/aminatu-ahmad-kbai.jpg";
 import asmau from "@/assets/team/asmau-adamu-jibia.jpg";
+import almustapha from "@/assets/team/almustapha-mujtaba-lawal.jpg";
+import fadimatu from "@/assets/team/fadimatu-hafiz-haske.jpg";
+// Photo ready for the second team member in the brown kaftan; add his name below.
+// import memberBrownKaftan from "@/assets/team/team-member-brown-kaftan.jpg";
 
 export interface TeamMember {
   name: string;
@@ -23,8 +27,9 @@ export const teamMembers: TeamMember[] = [
   { name: "Usman Abubakar Yar'adua", role: "Team Member", image: usman },
   { name: "Aminatu Ahmad K/Bai", role: "Team Member", image: aminatu },
   { name: "Asmau Adamu Jibia", role: "Team Member", image: asmau },
-  { name: "Almustapha Mujtaba Lawal", role: "Team Member" },
-  { name: "Fadimatu Hafiz Haske", role: "Team Member" },
+  { name: "Almustapha Mujtaba Lawal", role: "Team Member", image: almustapha },
+  { name: "Fadimatu Hafiz Haske", role: "Team Member", image: fadimatu },
+  // { name: "<NAME>", role: "Team Member", image: memberBrownKaftan },
 ];
 
 export const contactInfo = {
